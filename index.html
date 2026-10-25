@@ -1,614 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jacob Gearity — Data & Sport Analytics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jacob Gearity</title>
+  <meta name="description" content="Data analytics student at Miami University and head football analytics intern for Miami RedHawks Football. Projects include Windmill, a third base coach simulator, and the Scottie Effect.">
+  <meta name="theme-color" content="#1e3a2b">
+  <link rel="canonical" href="https://gearity.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gearity.github.io/">
+  <meta property="og:title" content="Jacob Gearity">
+  <meta property="og:description" content="Data analytics at Miami University. Head football analytics intern for Miami RedHawks Football. Projects include Windmill, a third base coach simulator.">
+  <meta property="og:image" content="https://gearity.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --navy: #0d1b2a;
-      --navy-mid: #1a2e42;
-      --teal: #1cb8a8;
-      --teal-dim: #0e7a6e;
-      --sand: #f4ede3;
-      --sand-dark: #e8ddd0;
-      --red: #c0392b;
-      --text: #0d1b2a;
-      --muted: #5a6a7a;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--sand);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(244, 237, 227, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--sand-dark);
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem;
-      color: var(--navy);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--teal); }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 5rem;
-    }
-    .hero-text {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 5rem 3rem 5rem 5rem;
-    }
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.5rem;
-    }
-    .hero-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3.5rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      color: var(--navy);
-      margin-bottom: 1rem;
-    }
-    .hero-name em {
-      font-style: italic;
-      color: var(--teal);
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.7;
-      max-width: 420px;
-      margin-bottom: 2.5rem;
-    }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.8rem;
-      border-radius: 2px;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--navy);
-      color: var(--sand);
-      border: 2px solid var(--navy);
-    }
-    .btn-primary:hover { background: var(--teal); border-color: var(--teal); }
-    .btn-outline {
-      background: transparent;
-      color: var(--navy);
-      border: 2px solid var(--navy);
-    }
-    .btn-outline:hover { background: var(--navy); color: var(--sand); }
-
-    .hero-visual {
-      background: var(--navy);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .hero-visual::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(28,184,168,0.25) 0%, transparent 60%);
-    }
-    .stat-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .stat-cell {
-      padding: 2.5rem;
-      background: var(--navy);
-      text-align: center;
-    }
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3rem;
-      color: var(--teal);
-      line-height: 1;
-      display: block;
-    }
-    .stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(244,237,227,0.5);
-      margin-top: 0.5rem;
-      display: block;
-    }
-
-    /* SECTIONS */
-    section { padding: 6rem 5rem; }
-    section:nth-child(even) { background: white; }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--navy);
-      margin-bottom: 3rem;
-      line-height: 1.15;
-    }
-
-    /* ABOUT */
-    .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
-    .about-aside {}
-    .about-card {
-      background: var(--navy);
-      color: var(--sand);
-      padding: 2rem;
-      border-radius: 2px;
-    }
-    .about-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: var(--teal);
-    }
-    .skill-tag {
-      display: inline-block;
-      background: rgba(28,184,168,0.15);
-      border: 1px solid rgba(28,184,168,0.3);
-      color: var(--teal);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      margin: 0.2rem;
-      letter-spacing: 0.05em;
-    }
-    .about-body p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-      font-weight: 300;
-    }
-    .about-body p strong { color: var(--text); font-weight: 500; }
-    .contact-line {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--teal);
-      margin-top: 0.5rem;
-      display: block;
-    }
-
-    /* EXPERIENCE */
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-    .exp-item {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 3rem;
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--sand-dark);
-      animation: fadeUp 0.5s ease both;
-    }
-    .exp-item:first-child { border-top: 1px solid var(--sand-dark); }
-    .exp-meta {}
-    .exp-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-    .exp-org {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      color: var(--navy);
-      margin-top: 0.4rem;
-    }
-    .exp-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--teal);
-      letter-spacing: 0.06em;
-      margin-top: 0.25rem;
-    }
-    .exp-body ul { list-style: none; padding: 0; }
-    .exp-body li {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--muted);
-      font-weight: 300;
-      padding-left: 1.2rem;
-      position: relative;
-      margin-bottom: 0.4rem;
-    }
-    .exp-body li::before {
-      content: '→';
-      position: absolute; left: 0;
-      color: var(--teal);
-      font-size: 0.8rem;
-    }
-
-    /* PROJECTS */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-    .project-card {
-      background: var(--sand);
-      border: 1px solid var(--sand-dark);
-      padding: 2rem;
-      border-radius: 2px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,27,42,0.12); }
-    .project-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--teal);
-    }
-    .project-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.8rem;
-    }
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem;
-      color: var(--navy);
-      margin-bottom: 0.8rem;
-    }
-    .project-desc {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--muted);
-      font-weight: 300;
-      margin-bottom: 1.2rem;
-    }
-    .project-tech { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    .tech-pill {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      background: var(--navy);
-      color: var(--sand);
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-      letter-spacing: 0.05em;
-    }
-    .project-link {
-      display: inline-block;
-      margin-top: 1.2rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--teal);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-    .project-link:hover { border-color: var(--teal); }
-
-    /* FOOTER */
-    footer {
-      background: var(--navy);
-      color: rgba(244,237,227,0.6);
-      padding: 3rem 5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    footer a {
-      color: var(--teal);
-      text-decoration: none;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-    }
-    .footer-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      color: var(--sand);
-    }
-    .footer-links { display: flex; gap: 1.5rem; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .hero-text { padding: 6rem 1.5rem 3rem; }
-      section { padding: 4rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-      .footer-links { justify-content: center; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <nav>
-    <a href="#" class="nav-logo">JG</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="mailto:jacobgearity@gmail.com">Contact</a></li>
+  <header class="board">
+    <div>
+      <h1 class="brand-name">Jacob Gearity</h1>
+      <p class="brand-sub">Data analytics, Miami University</p>
+    </div>
+    <ul class="links">
+      <li><a href="mailto:jacobgearity@gmail.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jacob-gearity/">LinkedIn</a></li>
+      <li><a href="https://github.com/gearity">GitHub</a></li>
+      <li><a href="jacob-gearity-resume.pdf">Resume</a></li>
     </ul>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Data & Sport Analytics</p>
-      <h1 class="hero-name">Jacob<br><em>Gearity</em></h1>
-      <p class="hero-sub">
-        Miami University student turning raw data into competitive advantages — in sport, industry, and everything between.
-      </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="mailto:jacobgearity@gmail.com" class="btn btn-outline">Get in Touch</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="stat-grid">
-        <div class="stat-cell">
-          <span class="stat-num">3.54</span>
-          <span class="stat-label">GPA</span>
-        </div>
-        <div class="stat-cell">
-          <span class="stat-num">34</span>
-          <span class="stat-label">ACT Score</span>
-        </div>
-        <div class="stat-cell">
-          <span class="stat-num">4+</span>
-          <span class="stat-label">Tools & Languages</span>
-        </div>
-        <div class="stat-cell">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Pro Sports Orgs</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <main class="home">
+    <p class="lede">I study data analytics at Miami University, and this year I'm the head football analytics intern for Miami RedHawks Football. Last season I worked on performance analytics for RedHawks softball. I want to work in a baseball or football front office.</p>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-aside">
-        <p class="section-label">Who I Am</p>
-        <div class="about-card">
-          <h3>Skills & Tools</h3>
-          <div>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">R</span>
-            <span class="skill-tag">SAS</span>
-            <span class="skill-tag">Excel</span>
-            <span class="skill-tag">Power Query</span>
-            <span class="skill-tag">Trackman</span>
-            <span class="skill-tag">Synergy</span>
-            <span class="skill-tag">AWRE</span>
-            <span class="skill-tag">Dropbox API</span>
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Google Suite</span>
-          </div>
-          <h3 style="margin-top:1.5rem;">Education</h3>
-          <p style="font-size:0.85rem; color: rgba(244,237,227,0.7); line-height:1.6;">
-            Miami University<br>
-            B.A. Data Analytics<br>
-            Minors: Business Analytics, Statistical Methods<br>
-            Concentration: Sport Analytics<br>
-            Honors College · Class of 2028
-          </p>
-          <h3 style="margin-top:1.5rem;">Contact</h3>
-          <a href="mailto:jacobgearity@gmail.com" class="contact-line">jacobgearity@gmail.com</a>
-          <a href="tel:2162120764" class="contact-line">(216) 212-0764</a>
-          <a href="https://www.linkedin.com/in/jacob-gearity-b93112331/" target="_blank" class="contact-line">LinkedIn ↗</a>
+    <section class="project" aria-labelledby="windmill">
+      <a class="shot" href="https://gearity.github.io/windmill/">
+        <img src="img/windmill-field.png" width="626" height="574" alt="Windmill's field view: the runner heads home from third as the throw comes in from left field">
+      </a>
+      <div>
+        <h2 class="project-name" id="windmill">Windmill</h2>
+        <p class="plain">A third base coach simulator. A runner on second is rounding third on a single to the outfield, and you have five seconds to send him or hold him. Then you see what really happened and watch the broadcast clip.</p>
+        <div class="finding">
+          <b>97.6%</b>
+          <span>of sends with nobody out score. Breakeven is 74%, so coaches are holding runners who would usually make it.</span>
+        </div>
+        <p class="stack">8,982 real decisions from 2024 to 2026, pulled from Statcast and the MLB Stats API with an R pipeline. The game is plain JavaScript with a shared leaderboard.</p>
+        <div class="actions">
+          <a class="call call-send" href="https://gearity.github.io/windmill/">Play Windmill</a>
+          <a class="call call-hold" href="https://github.com/gearity/windmill">See the code</a>
         </div>
       </div>
-      <div class="about-body">
-        <h2 class="section-title">Bridging data<br>and decision-making.</h2>
-        <p>
-          I'm a <strong>Data Analytics student at Miami University</strong> with a deep focus on sport analytics. I'm driven by a simple idea: better data leads to better decisions, whether that's a coach setting a lineup, an executive evaluating a trade, or a manufacturer optimizing a workflow.
-        </p>
-        <p>
-          As a <strong>Performance Analytics Manager for Miami Redhawks Softball</strong>, I work directly with coaches using tools like Trackman, Synergy, and AWRE to shape game strategy through opponent scouting and lineup optimization. Analytics isn't just academic to me — it's applied daily in a real competitive environment.
-        </p>
-        <p>
-          On the industry side, I'm currently a <strong>Data Analyst Intern at Dynamic Metal Services</strong>, where I convert raw lab outputs into clean, decision-ready datasets and automate data workflows using the Dropbox API and Power Query.
-        </p>
-        <p>
-          I'm a <strong>National Merit Commended Student</strong> and proud member of the Honors College. Outside the classroom, I run events for the Miami Sport Analytics Club and serve as Treasurer of the Golf Club.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <p class="section-label">Where I've Worked</p>
+    <section class="project study" aria-labelledby="scottie">
+      <div>
+        <h2 class="project-name" id="scottie">The Scottie Effect</h2>
+        <p class="study-q">Do players falter on Sunday when Scottie Scheffler is in the hunt?</p>
+        <div class="finding">
+          <b>+0.64</b>
+          <span>strokes worse in the final round for players who started it tied with or ahead of him (p = 0.0027)</span>
+        </div>
+      </div>
+      <div>
+        <p class="plain">PGA Tour final rounds since the 2022 season, from ESPN's golf data through Ray Carpenter's golfastr package. When Scheffler started Sunday in the top 15 and within six shots of the lead, the players tied with or ahead of him averaged 0.89 under par. The other 1,195 final rounds averaged 1.53 under.</p>
+        <div class="actions">
+          <a class="call call-send" href="scottie-effect.html">Read the study</a>
+        </div>
+      </div>
+    </section>
+
     <h2 class="section-title">Experience</h2>
-    <div class="exp-list">
+    <table class="record">
+      <tr>
+        <td class="when">2026–now</td>
+        <td class="role"><strong>Head football analytics intern</strong><span>Miami RedHawks Football</span></td>
+        <td class="what">I evaluate transfer portal prospects and recruiting targets, track FBS and FCS performance week by week, and chart game and practice data for the coaches.</td>
+      </tr>
+      <tr>
+        <td class="when">2025–26</td>
+        <td class="role"><strong>Performance analytics student manager</strong><span>Miami RedHawks Softball</span></td>
+        <td class="what">I wrote opponent scouting reports and worked with the coaches on lineup construction, using Trackman, Synergy, and AWRE. The team led the MAC in ERA and was second in OPS and home runs.</td>
+      </tr>
+      <tr>
+        <td class="when">2025–now</td>
+        <td class="role"><strong>Data analytics intern</strong><span>Dynamic Metal Services, Cleveland</span></td>
+        <td class="what">I rebuilt the old data workflows with the Dropbox API, Excel, and Power Query. Day to day I turn raw lab output into clean datasets and handle ad hoc analysis and charts.</td>
+      </tr>
+      <tr>
+        <td class="when">2025–now</td>
+        <td class="role"><strong>President</strong><span>Miami University Sport Analytics Club</span></td>
+        <td class="what">Before becoming president I ran the club's events. I built NBA playoff and March Madness models in Python and set up talks with analysts and executives from MLB, the NBA, and the NHL.</td>
+      </tr>
+      <tr>
+        <td class="when">2023–25</td>
+        <td class="role"><strong>Guest services and event operations</strong><span>Cleveland Guardians and Cavaliers</span></td>
+        <td class="what">I also interned with Guardians ballpark operations for my high school senior capstone.</td>
+      </tr>
+      <tr>
+        <td class="when">2020–23</td>
+        <td class="role"><strong>Certified referee</strong><span>U.S. Soccer Federation</span></td>
+        <td class="what">I worked youth matches in Northeast Ohio as a head referee and assistant referee.</td>
+      </tr>
+    </table>
 
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-date">Dec 2025 – Present</div>
-          <div class="exp-org">Dynamic Metal Services</div>
-          <div class="exp-title">Data Analyst Intern</div>
-        </div>
-        <div class="exp-body">
-          <ul>
-            <li>Convert raw laboratory outputs into clean, decision-ready datasets for internal stakeholders.</li>
-            <li>Complete ad-hoc data analysis, management, and visualization projects.</li>
-            <li>Automate data workflows using the Dropbox API, Excel, and Power Query.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-date">Ongoing</div>
-          <div class="exp-org">Miami Redhawks Softball</div>
-          <div class="exp-title">Performance Analytics Manager</div>
-        </div>
-        <div class="exp-body">
-          <ul>
-            <li>Use Trackman, Synergy, and AWRE to guide team decision-making in real competitive settings.</li>
-            <li>Work directly with coaches to optimize lineup construction.</li>
-            <li>Create and distribute detailed opponent scouting reports.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-date">May 2023 – Jul 2025</div>
-          <div class="exp-org">Cleveland Guardians &amp; Cavaliers</div>
-          <div class="exp-title">Guest Services &amp; Ballpark Operations</div>
-        </div>
-        <div class="exp-body">
-          <ul>
-            <li>Ensured a positive guest experience and scanned thousands of tickets per event.</li>
-            <li>Supported Guardians Ballpark Operations as part of high school senior capstone project.</li>
-            <li>Gained direct exposure to professional athletes and team executives.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-date">Apr 2020 – May 2023</div>
-          <div class="exp-org">U.S. Soccer Federation</div>
-          <div class="exp-title">Certified Head Referee</div>
-        </div>
-        <div class="exp-body">
-          <ul>
-            <li>Officiated youth soccer matches, enforcing rules and maintaining game flow.</li>
-            <li>Managed and maintained personal officiating schedule independently.</li>
-            <li>Communicated decisions clearly and professionally to coaches and players.</li>
-          </ul>
-        </div>
-      </div>
-
+    <div class="school">
+      <section>
+        <h2 class="section-title">School</h2>
+        <p>Miami University in Oxford, Ohio. B.A. in data analytics with minors in statistical methods and business analytics and a concentration in sport analytics. Eligible to graduate in May 2027.</p>
+        <p>Honors College, RedHawk Excellence Scholar, 3.6 GPA. National Merit Commended Student. Treasurer of the Miami University Golf Club.</p>
+      </section>
+      <section>
+        <h2 class="section-title">Tools</h2>
+        <dl class="tools">
+          <dt>Languages</dt>
+          <dd>R, Python, SAS, SQL</dd>
+          <dt>Software</dt>
+          <dd>Power BI, Tableau, Trackman, Synergy, AWRE</dd>
+        </dl>
+      </section>
     </div>
-  </section>
+  </main>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="section-label">What I've Built</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-tag">Sport Analytics</div>
-        <div class="project-title">NBA Playoff Predictive Model</div>
-        <p class="project-desc">
-          Built a predictive model for NBA playoff outcomes as part of Miami's Sport Analytics Club. Leveraged historical performance data and advanced stats to forecast series results.
-        </p>
-        <div class="project-tech">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Machine Learning</span>
-          <span class="tech-pill">Sports Data</span>
-        </div>
-        <!-- <a href="#" class="project-link">View on GitHub ↗</a> -->
-      </div>
-
-      <div class="project-card">
-        <div class="project-tag">Sport Analytics</div>
-        <div class="project-title">March Madness Bracket Model</div>
-        <p class="project-desc">
-          Developed a probabilistic bracket prediction model for NCAA March Madness, incorporating team efficiency metrics, seeding, and historical upset trends.
-        </p>
-        <div class="project-tech">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Statistical Modeling</span>
-          <span class="tech-pill">NCAA Data</span>
-        </div>
-        <!-- <a href="#" class="project-link">View on GitHub ↗</a> -->
-      </div>
-
-      <div class="project-card">
-        <div class="project-tag">Industry Analytics</div>
-        <div class="project-title">Lab Data Pipeline Automation</div>
-        <p class="project-desc">
-          Designed and implemented an automated data workflow at Dynamic Metal Services using the Dropbox API and Power Query to eliminate manual processing of raw laboratory outputs.
-        </p>
-        <div class="project-tech">
-          <span class="tech-pill">Dropbox API</span>
-          <span class="tech-pill">Power Query</span>
-          <span class="tech-pill">Excel</span>
-        </div>
-      </div>
-
-      <div class="project-card" style="border-style: dashed; border-color: var(--sand-dark); background: transparent;">
-        <div class="project-tag" style="color: var(--muted);">Coming Soon</div>
-        <div class="project-title" style="color: var(--muted);">More Projects</div>
-        <p class="project-desc">
-          More projects are on the way. Check back soon — or reach out if you want to collaborate on something.
-        </p>
-        <a href="mailto:jacobgearity@gmail.com" class="project-link">Get in Touch →</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-name">Jacob Gearity</div>
-    <div class="footer-links">
-      <a href="mailto:jacobgearity@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/jacob-gearity-b93112331/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/" target="_blank">GitHub</a>
-    </div>
+  <footer class="board foot">
+    <p><a href="mailto:jacobgearity@gmail.com">jacobgearity@gmail.com</a></p>
+    <p>Cleveland, Ohio</p>
   </footer>
-
 </body>
 </html>

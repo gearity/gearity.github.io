@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Scottie Effect: Jacob Gearity</title>
+  <meta name="description" content="Do players falter on Sunday when Scottie Scheffler is in the hunt? PGA Tour final rounds since 2022 say yes, by 0.64 strokes.">
+  <meta name="theme-color" content="#1e3a2b">
+  <link rel="canonical" href="https://gearity.github.io/scottie-effect">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gearity.github.io/scottie-effect">
+  <meta property="og:title" content="The Scottie Effect">
+  <meta property="og:description" content="Do players falter on Sunday when Scottie Scheffler is in the hunt? PGA Tour final rounds since 2022 say yes, by 0.64 strokes.">
+  <meta property="og:image" content="https://gearity.github.io/img/scottie-effect-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="board">
+    <div>
+      <a class="brand-name" href="./">Jacob Gearity</a>
+      <p class="brand-sub">Data analytics, Miami University</p>
+    </div>
+    <ul class="links">
+      <li><a href="mailto:jacobgearity@gmail.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jacob-gearity/">LinkedIn</a></li>
+      <li><a href="https://github.com/gearity">GitHub</a></li>
+      <li><a href="jacob-gearity-resume.pdf">Resume</a></li>
+    </ul>
+  </header>
+
+  <main class="article">
+    <article>
+      <h1>The Scottie Effect</h1>
+      <p class="dek">Do players falter on Sunday when Scottie Scheffler is in the hunt?</p>
+      <p class="meta">May 3, 2026</p>
+
+      <p>Scottie Scheffler went into the final round of the Cadillac Championship tied for second, six shots behind Cameron Young. Six shots is a big lead, but we've seen enough Scheffler comebacks and opponent collapses to know not to count him out. So I wanted to find out whether opponents really do falter when Scheffler is in the hunt.</p>
+
+      <p>I used golfastr, Ray Carpenter's R package that pulls tournament data from ESPN's golf API, with every final round since the start of the 2022 PGA Tour season. That's when Scheffler reached No. 1 in the Official World Golf Ranking. A round counts as Scheffler being in the hunt when:</p>
+
+      <ul>
+        <li>Scheffler is in the top 15, ties included, going into the final round</li>
+        <li>the other player is tied with or ahead of him going into the final round</li>
+        <li>both are within six shots of the leader</li>
+      </ul>
+
+      <p>I then compared how players scored in those rounds against final rounds without Scheffler chasing them.</p>
+
+      <figure class="chart">
+        <figcaption>
+          <strong>Players ahead of Scheffler score worse on Sunday</strong>
+          <span>Average final-round score, strokes under par, since the 2022 season</span>
+        </figcaption>
+        <div class="plot">
+          <div class="bar-row" title="Scheffler in the hunt: 284 rounds, 0.89 under par on average">
+            <div class="bar-label">With Scheffler in the hunt <small>284 rounds</small></div>
+            <div class="bar-track"><span class="bar bar-hi" style="--v: .89"></span><b>0.89 under</b></div>
+          </div>
+          <div class="bar-row" title="Every other final round: 1,195 rounds, 1.53 under par on average">
+            <div class="bar-label">Every other final round <small>1,195 rounds</small></div>
+            <div class="bar-track"><span class="bar" style="--v: 1.53"></span><b>1.53 under</b></div>
+          </div>
+        </div>
+        <div class="axis" aria-hidden="true">
+          <span style="left: 0">0</span><span style="left: 20%">0.5</span><span style="left: 40%">1.0</span><span style="left: 60%">1.5</span><span style="left: 80%">2.0</span><span style="left: 100%">2.5</span>
+        </div>
+        <div class="note">Difference 0.64 strokes, p = 0.0027</div>
+      </figure>
+
+      <p>The effect is real. In the 284 final rounds that fit, players averaged 0.89 under par. In the other 1,195 they averaged 1.53 under. With Scheffler behind them, players scored 0.64 strokes worse (p = 0.0027).</p>
+
+      <h2>That Sunday</h2>
+      <p>Young didn't fold. He shot 68 and won by six, wire to wire. Scheffler also shot 68 and finished second.</p>
+
+      <p class="source">First posted on <a href="https://www.linkedin.com/feed/update/urn:li:activity:7456766396157497344/">LinkedIn</a>. Data from ESPN through <a href="https://github.com/array-carpenter/golfastr">golfastr</a>.</p>
+    </article>
+  </main>
+
+  <footer class="board foot">
+    <p><a href="mailto:jacobgearity@gmail.com">jacobgearity@gmail.com</a></p>
+    <p>Cleveland, Ohio</p>
+  </footer>
+</body>
+</html>
